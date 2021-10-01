@@ -32,7 +32,7 @@ Good to Have Features:
  
 Technology Stack:
 
-Front-end – CSS, HTML, JavaScript, Bootstrap,jquery
+Front-end – CSS, HTML, JavaScript, Bootstrap, jQuery
 
 Back-end – Python (Django)
 
