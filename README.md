@@ -15,7 +15,7 @@ Must Have Features:
 |S. No.|Feature|
 |------|-------|
 |1.|Purchase of ice-creams and sweets.|
-|2.|Give all products’ details like price, brand, quantity, weight, flavour, description etc.|
+|2.|Give all products’ details like price, brand, quantity, weight, category, flavour, description etc.|
 |3.|User sign-up module to create customer accounts.|
 |4.|Product tracking.|
 |5.|“Get more info about the brand” section.|
