@@ -9,7 +9,7 @@ Group Members:
 
 
  
-Project Title: Sweet tooth (Ice-creams and sweets shopping website)
+Project Title: Sweet tooth (Ice-creams and sweets' shopping website)
  
 Must Have Features:
 |S. No.|Feature|
