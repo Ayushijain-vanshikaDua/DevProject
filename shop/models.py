@@ -38,7 +38,7 @@ class Order(models.Model):
     phone = models.CharField(max_length=111, default="")
 
     def __str__(self):
-        return self.order_id + " " +self.name
+        return str(self.order_id) + " " +self.name
 
 class OrderUpdate(models.Model):
     update_id  = models.AutoField(primary_key=True)
@@ -47,5 +47,5 @@ class OrderUpdate(models.Model):
     timestamp = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.order_id + " " +self.update_desc[0:7] + "..."
+        return str(self.order_id) + " " +self.update_desc[0:7] + "..."
 
