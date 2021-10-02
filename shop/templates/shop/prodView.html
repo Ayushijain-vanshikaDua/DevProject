@@ -2,35 +2,26 @@
 
 {% block title%}sweettooth | {{product.product_name}}{% endblock %}
 {% block body %}
+
 <div class="container my-4">
     <div class="row">
     <div class="col-md-4">
     <div class="row">
         <img src="/media/{{product.image}}" width="233px" height="385px">
     </div>
-        <div class="row">
-            <button class="btn btn-primary mx-3">Buy Now</button>
-            <span id="divpr{{product.id}}" class="divpr">
-                                    <button id="pr{{product.id}}" class="btn btn-primary cart">Add To Cart</button>
-                                </span>
-        </div>
-
     </div>
 
     <div class="col-md-8">
     
-<h5 id="namepr{{product.id}}">{{product.product_name}}</h5>
-                                <p>{{product.desc}}...</p>
-                                <h6>Price: <span id="pricepr{{product.id}}">{{product.price}}</span></h6>
-                                
-       <!-- <h5>{{product.product_name}}</h5>
-        <p><b>Rs.{{product.price}} </b></p>
-        <p>{{product.desc}}</p>-->
-
-
+    <h5 id="namepr{{product.id}}">{{product.product_name}}</h5>
+    <p>{{product.desc}}...</p>
+    <h6>Price: <span id="pricepr{{product.id}}">{{product.price}}</span></h6>
+    <span id="divpr{{product.id}}" class="divpr">
+        <button id="pr{{product.id}}" class="btn btn-primary cart">Add To Cart</button>
+    </span>
+ 
     </div>
     </div>
-
 
 </div>
 
@@ -38,6 +29,7 @@
 
 
 {% block js %}
+
 <script>
 
 if (localStorage.getItem('cart') == null) {
@@ -59,7 +51,6 @@ $('.divpr').on('click', 'button.cart', function(){
 
     }
     updateCart(cart);
-
 });
 
 //Add Popover to cart
@@ -97,17 +88,14 @@ function clearCart() {
     localStorage.clear();
     cart = {};
     updateCart(cart);
-
-
 }
 
 function updateCart(cart) {
     var sum = 0;
     for (var item in cart) {
         sum = sum + cart[item][0];
-        if(item == 'pr'+{{product.id}})
-        {
-        document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+        if(item == 'pr'+{{product.id}}) {
+            document.getElementById('div' + item).innerHTML = "<b>Quantity:</b> <button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
         }
     }
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -125,6 +113,7 @@ $('.divpr').on("click", "button.minus", function() {
         document.getElementById('divpr' + a).innerHTML = '<button id="pr'+a+'" class="btn btn-primary cart">Add to Cart</button>';
         delete cart['pr'+a];
     }
+
     else{
         document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
     }
