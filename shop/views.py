@@ -109,4 +109,8 @@ def loginUser(request):
     
 def logoutUser(request):
     logout(request)
-    return redirect("/shop/login")
+    return redirect("/shop/login.html")
+
+
+def signup(request):
+    return render(request, 'shop/signup.html')
