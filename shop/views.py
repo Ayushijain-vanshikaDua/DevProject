@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Product, Contact, Order, OrderUpdate
 from math import ceil
 import json
+from django.contrib.auth import authenticate, logout, login
+from django.contrib.auth.models import User
 
 # Create your views here.
 from django.http import HttpResponse
@@ -88,3 +90,23 @@ def checkout(request):
         id = order.order_id
         return render(request, 'shop/checkout.html', {'thank':thank, 'id': id})
     return render(request, 'shop/checkout.html')
+
+
+def loginUser(request):
+    if request.method=="POST":
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        
+        user = authenticate(username=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect("/shop/")
+        else:
+            #return HttpResponse('Not a user')
+            return render(request, 'shop/login.html')
+    else:
+        return render(request, 'shop/login.html')
+    
+def logoutUser(request):
+    logout(request)
+    return redirect("/shop/login")
