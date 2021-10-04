@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Product, Contact, Order, OrderUpdate
+from .models import Product, Contact, Order, OrderUpdate, Customer
 from math import ceil
 import json
-from django.contrib.auth import authenticate, logout, login
-from django.contrib.auth.models import User
+from django.contrib.auth import logout
+from django.contrib import messages
 
 # Create your views here.
 from django.http import HttpResponse
@@ -96,13 +96,14 @@ def loginUser(request):
     if request.method=="POST":
         email = request.POST.get('email')
         password = request.POST.get('password')
-        
-        user = authenticate(username=email, password=password)
-        if user is not None:
-            login(request, user)
+        print(email)
+        print(password)
+        user = Customer.objects.filter(email=email, password=password)
+        if len(user) > 0:
             return redirect("/shop/")
         else:
             #return HttpResponse('Not a user')
+            messages.success(request, 'Please enter correct email and password!')
             return render(request, 'shop/login.html')
     else:
         return render(request, 'shop/login.html')
@@ -113,4 +114,18 @@ def logoutUser(request):
 
 
 def signup(request):
-    return render(request, 'shop/signup.html')
+    if request.method=="POST":
+        firstName = request.POST.get('firstName')
+        lastName = request.POST.get('lastName')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        state = request.POST.get('state')
+        zip = request.POST.get('zip')
+        password = request.POST.get('password1')
+        
+        customer = Customer(firstName=firstName, lastName=lastName, email=email, phone=phone, address=address, state=state, zip=zip, password=password)
+        customer.save()
+        return redirect("/shop/login")
+    else:
+        return render(request, 'shop/signup.html')

@@ -15,48 +15,57 @@
 
 
     <style>
-    .bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    }
 
-    @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-    font-size: 3.5rem;
-    }
+    .required:after {
+        content:" *";
+        color: red;
+        font-size: 20px;
     }
     </style>
 
     
     <!-- Custom styles for this template -->
     <link href="https://getbootstrap.com/docs/5.1/examples/sign-in/signin.css" rel="stylesheet">
+
+
 </head>
 
-<body class="text-center">
-   
+
+<body>
+<div>
+{% if messages %}
+<script>
+alert('Please enter correct email and password!');
+</script>
+{% endif %}
+</div>
+
+<div class="container text-center">
 <main class="form-signin">
   <form method="POST" action="/shop/login/">
   {% csrf_token %}
     <img class="mb-4" src="\media\shop\images\img_avatar2.png" alt="" width="72" height="65">
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    <h1 class="h3 mb-3 fw-normal">Please Sign-in</h1>
 
     <div class="form-floating">
-      <input type="email" class="form-control" id="email" name="email" placeholder="Enter your Email">
+      <input type="email" class="form-control" id="email" name="email" placeholder="Enter your Email" required>
       <label for="floatingInput">Email address</label>
     </div>
+
     <div class="form-floating">
-      <input type="password" class="form-control" id="password" name="password" placeholder="Enter your Password">
+      <input type="password" class="form-control" id="password" name="password" placeholder="Enter your Password" required>
       <label for="floatingPassword">Password</label>
     </div>
 
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-    <a href="/shop" class="w-100 btn btn-lg btn-dark my-2">Go to Home</a>
-    <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+    <button class="w-100 btn btn-lg btn-success" type="submit">Sign in</button>
+    <a href="/shop/signup" class="w-100 btn btn-lg btn-primary my-2">Sign Up</a>
+    <p class="mb-1 mt-5">&copy; 2021 sweettooth</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="/shop/">Home</a></li>
+    </ul>
   </form>
 </main>
-  
+</div>
+
 </body>
 </html>

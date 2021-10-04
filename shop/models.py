@@ -49,3 +49,16 @@ class OrderUpdate(models.Model):
     def __str__(self):
         return str(self.order_id) + " " +self.update_desc[0:7] + "..."
 
+class Customer(models.Model):
+    firstName = models.CharField(max_length=50)
+    lastName = models.CharField(max_length=50)
+    email = models.CharField(max_length=70)
+    phone = models.CharField(max_length=70)
+    address = models.CharField(max_length=500)
+    state = models.CharField(max_length=50)
+    zip = models.CharField(max_length=6)
+    password = models.CharField(max_length=50, default='')
+
+    def __str__(self):
+        return self.firstName+self.lastName
+
