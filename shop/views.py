@@ -129,3 +129,9 @@ def signup(request):
         return redirect("/shop/login")
     else:
         return render(request, 'shop/signup.html')
+
+def temp(request):
+    return render(request, 'shop/temp.html')
+
+def temp2(request):
+    return render(request, 'shop/temp2.html')
