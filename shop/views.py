@@ -100,7 +100,9 @@ def loginUser(request):
         print(password)
         user = Customer.objects.filter(email=email, password=password)
         if len(user) > 0:
+            #messages.success(request, 'Sign-up successful! Please log-in now!')
             return redirect("/shop/")
+    
         else:
             #return HttpResponse('Not a user')
             messages.success(request, 'Please enter correct email and password!')
