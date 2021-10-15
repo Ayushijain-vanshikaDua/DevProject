@@ -4,6 +4,7 @@ from math import ceil
 import json
 from django.contrib.auth import logout
 from django.contrib import messages
+from typing import ContextManager
 
 # Create your views here.
 from django.http import HttpResponse
@@ -100,12 +101,12 @@ def loginUser(request):
         print(password)
         user = Customer.objects.filter(email=email, password=password)
         if len(user) > 0:
-            #messages.success(request, 'Sign-up successful! Please log-in now!')
+            messages.success(request, 'Sign-in successful!')
             return redirect("/shop/")
     
         else:
             #return HttpResponse('Not a user')
-            messages.success(request, 'Please enter correct email and password!')
+            messages.warning(request, 'Please enter correct email and password!')
             return render(request, 'shop/login.html')
     else:
         return render(request, 'shop/login.html')

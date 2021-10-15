@@ -54,6 +54,29 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
 </button>
   </div>
 </nav>
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+  <strong>{{ message }}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %} 
+<!--
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show my-0" role="alert">
+  <strong>{{ message }}</stong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" aria-hidden="true">&times;
+  
+  </button>
+</div>
+{% endfor %}
+{% endif %}
+-->
   {% block body %} {% endblock %}
 
     <!-- Optional JavaScript -->
