@@ -19,7 +19,7 @@
 
 <div class="container my-10">
     <h3 class="text-center">Sign-in Form</h3><br>
-    <form action="/shop/login/" method="post">{% csrf_token %}
+    <form action="/shop/signin/" method="post">{% csrf_token %}
     <div class="form-group">
         <label class="required" for="name">Email</label>
         <input type="email" class="form-control" id="email" name='email' placeholder="Enter email" required>
@@ -32,7 +32,7 @@
     <br>
 
     <button type="submit" class="w-100 btn btn-primary">Login</button>
-    <a href="/shop/signup/" class="w-100 btn btn-secondary mt-3">Create a account</a>
+    <a href="/shop/signup/" class="w-100 btn btn-secondary mt-3">Create a sweettooth account</a>
 
 </form>
 </div>

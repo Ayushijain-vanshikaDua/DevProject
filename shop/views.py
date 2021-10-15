@@ -93,7 +93,7 @@ def checkout(request):
     return render(request, 'shop/checkout.html')
 
 
-def loginUser(request):
+def signin(request):
     if request.method=="POST":
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -107,13 +107,13 @@ def loginUser(request):
         else:
             #return HttpResponse('Not a user')
             messages.warning(request, 'Please enter correct email and password!')
-            return render(request, 'shop/login.html')
+            return render(request, 'shop/signin.html')
     else:
-        return render(request, 'shop/login.html')
+        return render(request, 'shop/signin.html')
     
 def logoutUser(request):
     logout(request)
-    return redirect("/shop/login.html")
+    return redirect("/shop/signin.html")
 
 
 def signup(request):
@@ -127,9 +127,15 @@ def signup(request):
         zip = request.POST.get('zip')
         password = request.POST.get('password1')
         
-        customer = Customer(firstName=firstName, lastName=lastName, email=email, phone=phone, address=address, state=state, zip=zip, password=password)
-        customer.save()
-        return redirect("/shop/login")
+        customer = Customer.objects.filter(email=email)
+        if len(customer) > 0:
+            messages.info(request, 'One sweettooth account already exists with this email ID! Try creating using another one!')
+            return redirect("/shop/signup")
+    
+        else:
+            customer = Customer(firstName=firstName, lastName=lastName, email=email, phone=phone, address=address, state=state, zip=zip, password=password)
+            customer.save()
+            return redirect("/shop/signin")
     else:
         return render(request, 'shop/signup.html')
 
