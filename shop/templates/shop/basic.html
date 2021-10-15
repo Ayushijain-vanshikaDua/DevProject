@@ -7,7 +7,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
     <title>{% block title%} {% endblock %}</title>
     
     <style>
@@ -17,7 +18,7 @@
   <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/shop">sweettooth!</a>
+  <a class="navbar-brand" href="/shop"><span id="welcome">sweettooth!</span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -45,7 +46,13 @@
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    <a href="/shop/signin"><button class="btn btn-outline-success mx-2 my-2 my-sm-0" type="submit">Sign In</button></a>
+
+
+    <span id="user">
+    
+    </span>
+
+
     <button type="button" class="btn btn-secondary mx-2" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Vivamus
 sagittis lacus vel augue laoreet rutrum faucibus.">
 
@@ -65,18 +72,7 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
 </div>
 {% endfor %}
 {% endif %} 
-<!--
-{% if messages %}
-{% for message in messages %}
-<div class="alert alert-{{ message.tags }} alert-dismissible fade show my-0" role="alert">
-  <strong>{{ message }}</stong>
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" aria-hidden="true">&times;
-  
-  </button>
-</div>
-{% endfor %}
-{% endif %}
--->
+
   {% block body %} {% endblock %}
 
     <!-- Optional JavaScript -->
@@ -85,6 +81,39 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     {% block js %} {% endblock %}
+
+    <script>
+    
+    function getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      console.log(decodedCookie);
+      let ca = decodedCookie.split(';');
+      for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+
+    userName = getCookie('userName');
+
+    if(userName != ""){
+      document.getElementById("welcome").innerHTML = "Welcome, " + getCookie('userName');
+      document.getElementById("user").innerHTML = '<a href="/shop/signout"><button class="btn btn-outline-success mx-2 my-2 my-sm-0" type="submit">Sign Out</button></a>';
+      
+    }
+    
+    else{
+      document.getElementById('user').innerHTML = '<a href="/shop/signin"><button class="btn btn-outline-success mx-2 my-2 my-sm-0" type="submit">Sign In</button></a>';
+    }
+
+    </script>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
       <p class="mb-1">&copy; 2021 sweettooth</p>

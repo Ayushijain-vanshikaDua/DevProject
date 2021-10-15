@@ -4,10 +4,9 @@ from math import ceil
 import json
 from django.contrib.auth import logout
 from django.contrib import messages
-from typing import ContextManager
 
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, response
 
 
 def index(request):
@@ -97,23 +96,24 @@ def signin(request):
     if request.method=="POST":
         email = request.POST.get('email')
         password = request.POST.get('password')
-        print(email)
-        print(password)
+        #print(email)
+        #print(password)
         user = Customer.objects.filter(email=email, password=password)
         if len(user) > 0:
+            print(user[0].firstName)
             messages.success(request, 'Sign-in successful!')
-            return redirect("/shop/")
+            response = redirect("/shop/")
+            response.set_cookie('userName', user[0].firstName)
+            return response
     
         else:
-            #return HttpResponse('Not a user')
             messages.warning(request, 'Please enter correct email and password!')
             return render(request, 'shop/signin.html')
     else:
         return render(request, 'shop/signin.html')
     
-def logoutUser(request):
-    logout(request)
-    return redirect("/shop/signin.html")
+def signout(request):
+    return render(request, 'shop/signout.html')
 
 
 def signup(request):
@@ -135,6 +135,7 @@ def signup(request):
         else:
             customer = Customer(firstName=firstName, lastName=lastName, email=email, phone=phone, address=address, state=state, zip=zip, password=password)
             customer.save()
+            messages.success(request, 'Account created successfully! Please proceed to sign-in!')
             return redirect("/shop/signin")
     else:
         return render(request, 'shop/signup.html')

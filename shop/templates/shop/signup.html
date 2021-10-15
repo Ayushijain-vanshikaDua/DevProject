@@ -22,16 +22,12 @@
 {% endblock %}
 
 {% block body %}
+
 <script>
-document.getElementById("sub").style.display = "none";
-//document.getElementById("password2").addEventListener("focusout", check_password);
-//document.getElementById("password2").onchange = function() {check_password();};
 function check_password(){
-    console.log('in check_password');
     pass1 = document.getElementById('password1').value;
     pass2 = document.getElementById('password2').value;
-    console.log(pass1);
-    console.log(pass2);
+    
     if(pass1 != pass2){
         alert('Please enter same passwords!');
     }
@@ -74,7 +70,7 @@ function check_password(){
         <div class="col">
             <div class="form-group">
                 <label class="required" for="phone">Phone</label>
-                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Phone" required>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter 10-digit Phone Number" pattern="[0-9]{10}" required>
             </div>
         </div>
     </div>
@@ -126,9 +122,10 @@ function check_password(){
         <div class="col">
             <button type="reset" class="w-100 btn btn-danger">Reset</button>
         </div>
-        <div class="col">
-            <button type="submit" id="sub" class="w-100 btn btn-primary">Submit</button>
-        </div>
+    </div>
+
+    <div class="col">
+        <button type="submit" id="sub" class="w-100 btn btn-primary" style="display:none">Submit</button>
     </div>
 
     <br><br>
