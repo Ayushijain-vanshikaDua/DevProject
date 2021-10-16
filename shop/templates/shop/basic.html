@@ -39,6 +39,10 @@
        <li class="nav-item">
         <a class="nav-link" href="/shop/contact">Contact Us</a>
       </li>
+      
+      <span id="account">
+      
+      </span>
 
 
     </ul>
@@ -104,6 +108,7 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
     userName = getCookie('userName');
 
     if(userName != ""){
+      document.getElementById("account").innerHTML = '<li class="nav-item"><a class="nav-link" href="/shop/account">My Account</a></li>';
       document.getElementById("welcome").innerHTML = "Welcome, " + getCookie('userName');
       document.getElementById("user").innerHTML = '<a href="/shop/signout"><button class="btn btn-outline-success mx-2 my-2 my-sm-0" type="submit">Sign Out</button></a>';
       

@@ -74,24 +74,45 @@ def productView(request, myid):
 def checkout(request):
     if request.method=="POST":
         items_json = request.POST.get('itemsJson', '')
-        name = request.POST.get('name', '')
-        email = request.POST.get('email', '')
-        address = request.POST.get('address1', '') + " " + request.POST.get('address2', '')
-        city = request.POST.get('city', '')
-        state = request.POST.get('state', '')
-        zip_code = request.POST.get('zip_code', '')
-        phone = request.POST.get('phone', '')
-        order = Order(items_json=items_json, name=name, email=email, address=address, city=city,
-                       state=state, zip_code=zip_code, phone=phone)
-        order.save()
-        update = OrderUpdate(order_id=order.order_id, update_desc="The order has been placed")
-        update.save()
-        thank = True
-        id = order.order_id
-        return render(request, 'shop/checkout.html', {'thank':thank, 'id': id})
-    return render(request, 'shop/checkout.html')
+        email = request.COOKIES['email']
 
+        customer = Customer.objects.filter(email=email)
+        if len(customer) > 0:
+            #return render(request, 'shop/checkout.html', params)
+            name = customer[0].firstName + ' ' + customer[0].lastName
+            
+            order = Order(items_json=items_json, name=name, email=email, address=customer[0].address, state=customer[0].state, 
+                    zip_code=customer[0].zip, phone=customer[0].phone)
+            order.save()
+            update = OrderUpdate(order_id=order.order_id, update_desc="The order has been placed")
+            update.save()
+            
+            thank = True
+            id = order.order_id
+            #messages.success(request, 'Your order has been successfully placed! Use order id ' + str(id) + ' to track your order.')
+            #return redirect('/shop/')
+            return render(request, 'shop/checkout.html', {'thank':thank, 'id': id})
+    else:
+        try:
+            userName = request.COOKIES['userName']
+            email = request.COOKIES['email']
+            print(email)
+            print(userName)
 
+            customer = Customer.objects.filter(email=email)
+            if len(customer) > 0:
+                address = customer[0].address + ', '+ customer[0].state + ', ' + customer[0].zip
+                name = customer[0].firstName + ' ' + customer[0].lastName
+                params = {'address': address, 'phone': customer[0].phone, 'name': name, 'email': email}
+                print(params)
+                return render(request, 'shop/checkout.html', params)
+            
+        except Exception as e:
+            print(e)
+            messages.info(request, 'Please sign-in first!')
+            return redirect('/shop/signin')
+
+        
 def signin(request):
     if request.method=="POST":
         email = request.POST.get('email')
@@ -104,6 +125,8 @@ def signin(request):
             messages.success(request, 'Sign-in successful!')
             response = redirect("/shop/")
             response.set_cookie('userName', user[0].firstName)
+            response.set_cookie('email', user[0].email)
+            
             return response
     
         else:
@@ -145,3 +168,26 @@ def temp(request):
 
 def temp2(request):
     return render(request, 'shop/temp2.html')
+
+def account(request):
+    if request.method == "POST":
+        email = request.COOKIES['email']
+        customer = Customer.objects.filter(email=email)[0]
+       
+        customer.phone = request.POST.get('phone')
+        customer.address = request.POST.get('address')
+        customer.state = request.POST.get('state')
+        customer.zip = request.POST.get('zip')
+        customer.password = request.POST.get('password2')
+        customer.save()
+        messages.success(request, 'Your account details have been updated!')
+        return redirect('/shop/')
+        
+    else:
+        email = request.COOKIES['email']
+        customer = Customer.objects.filter(email=email)
+        if len(customer) > 0:
+            address = customer[0].address.replace(" ","")
+            #print(address)
+            params = {'address': address, 'phone': customer[0].phone, 'firstName': customer[0].firstName, 'lastName': customer[0].lastName, 'email': email, 'zip': customer[0].zip, 'state': customer[0].state, 'password': customer[0].password}      
+            return render(request, 'shop/account.html', params)
