@@ -14,8 +14,11 @@
 {% block body %}
 
 <script>
+document.getElementById('cart_pop').innerHTML = '';
+
 function delete_cookie(){
     document.cookie = "userName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    localStorage.clear();
 } 
 </script>
 

@@ -27,7 +27,6 @@ def about(request):
 
 
 def contact(request):
-    thank = False
     if request.method=="POST":
         name = request.POST.get('name', '')
         email = request.POST.get('email', '')
@@ -35,8 +34,9 @@ def contact(request):
         desc = request.POST.get('desc', '')
         contact = Contact(name=name, email=email, phone=phone, desc=desc)
         contact.save()
-        thank = True
-    return render(request, 'shop/contact.html', {'thank': thank})
+        messages.success(request, 'Thanks for contacting us. We will get back to you soon!')
+
+    return render(request, 'shop/contact.html')
 
 
 def tracker(request):
@@ -173,15 +173,23 @@ def account(request):
     if request.method == "POST":
         email = request.COOKIES['email']
         customer = Customer.objects.filter(email=email)[0]
-       
+        phone = customer.phone
+        address = customer.address
+        state = customer.state
+        zip = customer.zip
+        password = customer.password
         customer.phone = request.POST.get('phone')
         customer.address = request.POST.get('address')
         customer.state = request.POST.get('state')
         customer.zip = request.POST.get('zip')
         customer.password = request.POST.get('password2')
-        customer.save()
-        messages.success(request, 'Your account details have been updated!')
-        return redirect('/shop/')
+        
+        if(phone != customer.phone or address != customer.address or state != customer.state or zip != customer.zip or password != customer.password):
+            messages.success(request, 'Your account details have been updated!')
+            customer.save()
+            return redirect('/shop/')
+        else:
+            return redirect('/shop/')
         
     else:
         email = request.COOKIES['email']
