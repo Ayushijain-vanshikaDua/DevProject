@@ -72,6 +72,7 @@ def productView(request, myid):
 
 
 def checkout(request):
+    pd= Product.objects.all()
     if request.method=="POST":
         items_json = request.POST.get('itemsJson', '')
         email = request.COOKIES['email']
@@ -103,7 +104,7 @@ def checkout(request):
             if len(customer) > 0:
                 address = customer[0].address + ', '+ customer[0].state + ', ' + customer[0].zip
                 name = customer[0].firstName + ' ' + customer[0].lastName
-                params = {'address': address, 'phone': customer[0].phone, 'name': name, 'email': email}
+                params = {'address': address, 'phone': customer[0].phone, 'name': name, 'email': email,'product':pd}
                 print(params)
                 return render(request, 'shop/checkout.html', params)
             

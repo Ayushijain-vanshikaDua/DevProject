@@ -61,14 +61,22 @@ if ($.isEmptyObject(cart)) {
         sum = sum + qty;
         totalPrice = totalPrice + qty* itemPrice;
         console.log(item)
-        mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+        {% for p in product %}
+          if(item == 'pr'+{{p.id}})
+          {
+             mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    <img src='/media/{{p.image}}' class="img-thumbnail"  alt="..." width="80px" height="80px">
                     ${name}
+                    Rs.${itemPrice}
                     <span class="badge badge-primary badge-pill">${qty}</span>
                     <span class="remove">
                                     <button id=${item} class="btn btn-primary removeItem">Remove</button>
                                 </span>
                 </li>`
-        $('#items').append(mystr); 
+             $('#items').append(mystr);
+          }
+       {% endfor %}
+        
     }
 }
 
