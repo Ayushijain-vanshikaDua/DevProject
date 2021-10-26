@@ -42,7 +42,7 @@ def contact(request):
 def tracker(request):
     if request.method=="POST":
         orderId = request.POST.get('orderId', '')
-        email = request.POST.get('email', '')
+        email=request.COOKIES['email']
         try:
             order = Order.objects.filter(order_id=orderId, email=email)
             if len(order)>0:
@@ -56,6 +56,17 @@ def tracker(request):
                 return HttpResponse('{"status":"noitem"}')
         except Exception as e:
             return HttpResponse('{"status":"error"}')
+    else:
+        try:
+            userName = request.COOKIES['userName']
+            email = request.COOKIES['email']
+            customer = Customer.objects.filter(email=email)
+            if len(customer) > 0:
+                return render(request, 'shop/tracker.html')
+            
+        except Exception as e:
+            messages.info(request, 'Please sign-in first!')
+            return redirect('/shop/signin')       
 
     return render(request, 'shop/tracker.html')
 
