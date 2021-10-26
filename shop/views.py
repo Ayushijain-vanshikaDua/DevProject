@@ -79,7 +79,20 @@ def productView(request, myid):
 
     # Fetch the product using the id
     product = Product.objects.filter(id=myid)
-    return render(request, 'shop/prodView.html', {'product':product[0]})
+    c=product[0].category
+    allProds = []
+    catprods = Product.objects.values('brand', 'id').filter(category=c)
+    print(catprods)
+    cats = {item['brand'] for item in catprods}
+    for cat in cats:
+        prod = Product.objects.filter(brand=cat,category=c).exclude(id=myid)
+        n = len(prod)
+        nSlides = n // 4 + ceil((n / 4) - (n // 4))
+        allProds.append([prod, range(1, nSlides), nSlides])
+    params = {'product':product[0],'allProds':allProds}
+    
+    
+    return render(request, 'shop/prodView.html', params)
 
 
 def checkout(request):
