@@ -131,7 +131,7 @@ def checkout(request):
                 params = {'address': address, 'phone': customer[0].phone, 'name': name, 'email': email,'product':pd}
                 print(params)
                 return render(request, 'shop/checkout.html', params)
-            
+
         except Exception as e:
             print(e)
             messages.info(request, 'Please sign-in first!')
