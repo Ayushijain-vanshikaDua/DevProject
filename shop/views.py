@@ -88,7 +88,8 @@ def productView(request, myid):
         prod = Product.objects.filter(brand=cat,category=c).exclude(id=myid)
         n = len(prod)
         nSlides = n // 4 + ceil((n / 4) - (n // 4))
-        allProds.append([prod, range(1, nSlides), nSlides])
+        if n>=1:
+            allProds.append([prod, range(1, nSlides), nSlides])
     params = {'product':product[0],'allProds':allProds}
     
     
