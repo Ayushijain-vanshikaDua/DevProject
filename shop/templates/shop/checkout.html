@@ -42,7 +42,7 @@ if (localStorage.getItem('cart') == null) {
     cart = JSON.parse(localStorage.getItem('cart'));
 
 }
-console.log(cart);
+//console.log(cart);
 var sum = 0;
 var totalPrice = 0;
 
@@ -53,15 +53,15 @@ if ($.isEmptyObject(cart)) {
     document.getElementById('review').innerHTML = '';
     document.getElementById('customer_details').innerHTML = '';
 } else {
-    console.log("entered for loop")
+    //console.log("entered for loop")
     for (item in cart) {
-        console.log(item)
+        //console.log(item)
         let name = cart[item][1];
         let qty = cart[item][0];
         let itemPrice = cart[item][2];
         sum = sum + qty;
         totalPrice = totalPrice + qty* itemPrice;
-        console.log(item)
+        //console.log(item)
         {% for p in product %}
           if(item == 'pr'+{{p.id}})
           {
@@ -99,13 +99,13 @@ document.getElementById('order_details').innerHTML = str;
 
 $('.remove').on('click', 'button.removeItem', function(){
     var idstr = this.id.toString();
-    console.log(idstr);
+    //console.log(idstr);
     updateCart(cart, idstr);
     window.location.reload();
 });
 
 function updateCart(cart, idstr) {
-    console.log("in update, "+idstr)
+    //console.log("in update, "+idstr)
     var sum = 0;
     for (var item in cart) {
         
@@ -120,7 +120,8 @@ function updateCart(cart, idstr) {
 
     localStorage.setItem('cart', JSON.stringify(cart));
     
-    console.log(cart);document.getElementById('cart').innerHTML = sum;
+    //console.log(cart);
+    document.getElementById('cart').innerHTML = sum;
     updatePopover(cart);
 }
 
@@ -136,7 +137,7 @@ function updatePopover(cart) {
     }
 
     popStr = popStr + "</div> <a href='/shop/checkout'><button class='btn btn-primary' id ='checkout'>Checkout</button></a> <button class='btn btn-primary' onclick='clearCart()' id ='clearCart'>Clear Cart</button>     "
-    console.log(popStr);
+    //console.log(popStr);
     document.getElementById('popcart').setAttribute('data-content', popStr);
     //$('#popcart').popover('show');
 }

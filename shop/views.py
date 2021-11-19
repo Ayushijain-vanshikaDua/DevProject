@@ -82,7 +82,7 @@ def productView(request, myid):
     c=product[0].category
     allProds = []
     catprods = Product.objects.values('brand', 'id').filter(category=c)
-    print(catprods)
+    #print(catprods)
     cats = {item['brand'] for item in catprods}
     for cat in cats:
         prod = Product.objects.filter(brand=cat,category=c).exclude(id=myid)
@@ -122,15 +122,15 @@ def checkout(request):
         try:
             userName = request.COOKIES['userName']
             email = request.COOKIES['email']
-            print(email)
-            print(userName)
+            #print(email)
+            #print(userName)
 
             customer = Customer.objects.filter(email=email)
             if len(customer) > 0:
                 address = customer[0].address + ', '+ customer[0].state + ', ' + customer[0].zip
                 name = customer[0].firstName + ' ' + customer[0].lastName
                 params = {'address': address, 'phone': customer[0].phone, 'name': name, 'email': email,'product':pd}
-                print(params)
+                #print(params)
                 return render(request, 'shop/checkout.html', params)
 
         except Exception as e:
@@ -147,7 +147,7 @@ def signin(request):
         #print(password)
         user = Customer.objects.filter(email=email, password=password)
         if len(user) > 0:
-            print(user[0].firstName)
+            #print(user[0].firstName)
             messages.success(request, 'Sign-in successful!')
             response = redirect("/shop/")
             response.set_cookie('userName', user[0].firstName)

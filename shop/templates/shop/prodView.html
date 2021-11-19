@@ -142,7 +142,7 @@ $('#popcart').popover();
 updatePopover(cart);
 
 function updatePopover(cart) {
-    console.log('We are inside updatePopover');
+    //console.log('We are inside updatePopover');
     var popStr = "";
     popStr = popStr + "<h5> Cart for your items in my shopping cart </h5><div class='mx-2 my-2'>";
     var i = 1;
@@ -155,7 +155,7 @@ function updatePopover(cart) {
     //document.getElementById('name' + item).innerHTML.slice(0, 19)
     
     popStr = "</div> <a href='/shop/checkout'><button class='btn btn-primary' id ='checkout'>Checkout</button></a> <button class='btn btn-primary' onclick='clearCart()' id ='clearCart'>Clear Cart</button>     "
-    console.log(popStr);
+    //console.log(popStr);
     document.getElementById('popcart').setAttribute('data-content', popStr);
     $('#popcart').popover('show');
 
@@ -184,7 +184,7 @@ function updateCart(cart) {
     }
     localStorage.setItem('cart', JSON.stringify(cart));
     document.getElementById('cart').innerHTML = sum;
-    console.log(cart);
+    //console.log(cart);
     updatePopover(cart);
 }
 

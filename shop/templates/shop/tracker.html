@@ -53,7 +53,7 @@ $('#trackerForm').submit(function(event) {
 
         .done(function(data) {
             $('#citems').empty()
-            console.log(data)
+            //console.log(data)
             data = JSON.parse(data);
             
             if (data['status']=="success") {
