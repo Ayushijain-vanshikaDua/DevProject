@@ -5,13 +5,12 @@
 
 <main role="main">
 
-
   <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron" style="background-color:#50F6E6;">
+  <div class="jumbotron" style="background-color:#ffffff;">
     <div class="container">
- 
+
       <h1 class="display-3"><b>sweettooth!</b></h1>
-      <p style="font-size:24px;"><b>sweettooth</b> is an online ice-creams and sweets shopping website that brings you happiness and joy along with mouth-watering desserts, ice-creams,
+      <p style="font-size:24px;"><b>sweettooth</b> is an online ice creams and desserts shopping website that brings you happiness and joy along with mouth-watering desserts, ice-creams,
       ice-cream cakes and much more!
       
       <p style="font-size:24px;">We offer you a huge variety of appetizing flavours from the top-notch brands!</p>
@@ -22,74 +21,17 @@
       serve you, we assure you that one day we will be the biggest hub for ice-creams and sweets all over the India!</p>
 
       <h3><a href="/shop" style="text-decoration: none; color:#000000">What are you waiting for? Go and grab your favorite flavour!</a>
-      <a class="btn btn-primary btn-lg mt-0" style="background-color:#50F6E6; border:0px; color:#000000; font-size: 50px;" href="/shop" role="button"> &raquo;</a></h3>
-      
+      <a class="btn btn-primary btn-lg mt-0" style="background-color:#ffffff; border:0px; color:#000000; font-size: 50px;" href="/shop" role="button"> &raquo;</a></h3>
       
     </div>
   </div>
-
-<!-- Footer -->
-<footer class="page-footer font-small cyan darken-3">
-
-  <!-- Footer Elements -->
-  <div class="container">
-
-    <!-- Grid row-->
-    <div class="row">
-
-      <!-- Grid column -->
-      <div class="col-md-12 py-5">
-        <div class="mb-5 flex-center">
-
-          <!-- Facebook -->
-          <a class="fb-ic">
-            <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-          </a>
-          <!-- Twitter -->
-          <a class="tw-ic">
-            <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-          </a>
-          <!-- Google +-->
-          <a class="gplus-ic">
-            <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-          </a>
-          <!--Linkedin -->
-          <a class="li-ic">
-            <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-          </a>
-          <!--Instagram-->
-          <a class="ins-ic">
-            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-          </a>
-          <!--Pinterest-->
-          <a class="pin-ic">
-            <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
-          </a>
-        </div>
-      </div>
-      <!-- Grid column -->
-
-    </div>
-    <!-- Grid row-->
-
-  </div>
-  <!-- Footer Elements -->
-
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
-  </div>
-  <!-- Copyright -->
-
-</footer>
-<!-- Footer -->
-
-
-
-
-
-
 </main>
 
 
 {% endblock %}
+
+{%block js%}
+<script>
+  document.getElementById('cart_pop').innerHTML = '';
+</script>
+{%endblock%}

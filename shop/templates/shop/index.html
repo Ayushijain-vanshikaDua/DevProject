@@ -21,8 +21,6 @@ body .carousel-indicators{
 bottom: -40px;
 }
 .carousel-indicators li {
-
-
     background-color: #7270fc;
 }
 body .carousel-control-prev-icon,
@@ -45,7 +43,7 @@ padding-right: 0;
 <div class="container">
     <!--Slideshow starts here -->
     {% for product, range, nSlides in allProds %}
-    <h5 class="my-4">{{product.0.category}}</h5>
+    <h2 class="my-3 mx-4">{{product.0.category}}</h2>
     <div class="row">
         <div id="demo{{forloop.counter}}" class="col carousel slide my-3" data-ride="carousel">
             <ul class="carousel-indicators">
@@ -61,7 +59,8 @@ padding-right: 0;
                         <div class="card align-items-center" style="width: 18rem;">
                             <img src='/media/{{i.image}}' class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title" id="namepr{{i.id}}">{{i.product_name}}</h5>
+                                <h5 class="card-title" id="namepr{{i.id}}">{{i.product_name|slice:"0:22"}}</h5>
+                                <h6 class="card-title" >Brand: <span id="{{i.brand}}">{{i.brand}}</span></h6>
                                 <p class="card-text">{{i.desc|slice:"0:53"}}...</p>
                                 <h6 class="card-title" >Price: <span id="pricepr{{i.id}}">{{i.price}}</span></h6>
                                 <span id="divpr{{i.id}}" class="divpr">
@@ -122,19 +121,19 @@ $('#popcart').popover();
 updatePopover(cart);
 
 function updatePopover(cart) {
-    console.log('We are inside updatePopover');
+    //console.log('We are inside updatePopover');
     var popStr = "";
     popStr = popStr + "<h5> Cart for your items in my shopping cart </h5><div class='mx-2 my-2'>";
     var i = 1;
     for (var item in cart) {
         popStr = popStr + "<b>" + i + "</b>. ";
-        popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "... Qty: " + cart[item][0] + '<br>';
+        popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 10) + "... Qty: " + cart[item][0] + '<br>';
         i = i + 1;
 
     }
 
-    popStr = popStr + "</div> <a href='/shop/checkout'><button class='btn btn-primary' id ='checkout'>Checkout</button></a> <button class='btn btn-primary' onclick='clearCart()' id ='clearCart'>Clear Cart</button>     "
-    console.log(popStr);
+    popStr = "</div> <a href='/shop/checkout'><button class='btn btn-success' id ='checkout'>Checkout</button></a> <button class='btn btn-danger' onclick='clearCart()' id ='clearCart'>Clear Cart</button>     "
+    //console.log(popStr);
     document.getElementById('popcart').setAttribute('data-content', popStr);
     $('#popcart').popover('show');
 
@@ -161,7 +160,7 @@ function updateCart(cart) {
     }
     localStorage.setItem('cart', JSON.stringify(cart));
     document.getElementById('cart').innerHTML = sum;
-    console.log(cart);
+    //console.log(cart);
     updatePopover(cart);
 }
 
