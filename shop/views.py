@@ -110,7 +110,7 @@ def checkout(request):
             order = Order(items_json=items_json, name=name, email=email, address=customer[0].address, state=customer[0].state, 
                     zip_code=customer[0].zip, phone=customer[0].phone)
             order.save()
-            update = OrderUpdate(order_id=order.order_id, update_desc="The order has been placed")
+            update = OrderUpdate(order_id=order.order_id, update_desc="The order has been placed.")
             update.save()
             
             thank = True
@@ -135,7 +135,7 @@ def checkout(request):
 
         except Exception as e:
             print(e)
-            messages.info(request, 'Please sign-in first!')
+            messages.info(request, 'Please sign in first!')
             return redirect('/shop/signin')
 
         
@@ -148,7 +148,7 @@ def signin(request):
         user = Customer.objects.filter(email=email, password=password)
         if len(user) > 0:
             #print(user[0].firstName)
-            messages.success(request, 'Sign-in successful!')
+            messages.success(request, 'Sign in successful!')
             response = redirect("/shop/")
             response.set_cookie('userName', user[0].firstName)
             response.set_cookie('email', user[0].email)
