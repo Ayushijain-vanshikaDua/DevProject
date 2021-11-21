@@ -1,49 +1,38 @@
 {% extends 'shop/basic.html' %}
-
 {% block title%}sweettooth | Contact Us{% endblock %}
-
-{% block css %} 
+{% block css %}
 .required:after {
-    content:" *";
-    color: red;
-    font-size: 20px;
-  }
+content:" *";
+color: red;
+font-size: 20px;
+}
 {% endblock %}
-
 {% block body %}
-
 <div class="container my-3">
     <h3>Contact Us</h3>
     <form action="/shop/contact/" method="post">{% csrf_token %}
-  <div class="form-group">
-    <label class="required" for="name">Name</label>
-    <input type="text" class="form-control" id="name" name='name' placeholder="Enter Your Name" required>
-  </div>
-  <div class="form-group">
-    <label class="required" for="name">Email</label>
-    <input type="email" class="form-control" id="email" name='email' placeholder="Enter Your Email" required>
-  </div>
-
-    <div class="form-group">
-    <label for="name">Phone</label>
-    <input type="tel" class="form-control" id="phone" name='phone' placeholder="Enter Your 10-digit Phone Number" pattern="[0-9]{10}">
-  </div>
-
-
-   <div class="form-group">
-    <label class="required" for="desc">How May We Help You?</label>
-    <textarea class="form-control" id="desc" name='desc' rows="3" required></textarea>
-  </div>
+        <div class="form-group">
+            <label class="required" for="name">Name</label>
+            <input type="text" class="form-control" id="name" name='name' placeholder="Enter Your Name" required>
+        </div>
+        <div class="form-group">
+            <label class="required" for="name">Email</label>
+            <input type="email" class="form-control" id="email" name='email' placeholder="Enter Your Email" required>
+        </div>
+        <div class="form-group">
+            <label for="name">Phone</label>
+            <input type="tel" class="form-control" id="phone" name='phone' placeholder="Enter Your 10-digit Phone Number" pattern="[0-9]{10}">
+        </div>
+        <div class="form-group">
+            <label class="required" for="desc">How May We Help You?</label>
+            <textarea class="form-control" id="desc" name='desc' rows="3" required></textarea>
+        </div>
         <button type="submit" class="btn btn-success">Submit</button>
-</form>
-
-
-
+    </form>
 </div>
 {% endblock %}
 {% block js%}
 <script>
 document.getElementById('cart_pop').innerHTML = '';
-
 </script>
 {% endblock %}
