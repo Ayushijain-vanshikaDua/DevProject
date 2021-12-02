@@ -71,10 +71,6 @@ def tracker(request):
     return render(request, 'shop/tracker.html')
 
 
-def search(request):
-    return render(request, 'shop/search.html')
-
-
 def productView(request, myid):
 
     # Fetch the product using the id
@@ -189,11 +185,6 @@ def signup(request):
     else:
         return render(request, 'shop/signup.html')
 
-def temp(request):
-    return render(request, 'shop/temp.html')
-
-def temp2(request):
-    return render(request, 'shop/temp2.html')
 
 def account(request):
     if request.method == "POST":
